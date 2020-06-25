@@ -1,1 +1,122 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{
+    margin: 0px;
+    width: 100%;
+    min-height: 100vh;
+    // zoom: 90%;
+}
+
+
+.container{
+    align-self: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+.form-group{
+    width: 100%;
+}
+
+.jumbotron{
+    width: 100%;
+    text-align: center;
+    background: transparent;
+
+}
+
+.google-btn {
+    background-color: #ffffff;
+    text-align: center;
+    color: #797979;
+    border: #ffffff;
+    padding: 8dp;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 5px #808080;
+    font-family: 'Roboto';
+    font-weight: 500;
+}
+
+.fb-btn {
+    background-color: #3b5998;
+    text-align: center;
+    color: #F9F9F9;
+    border: #3b5998;
+    padding: 8dp;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 5px #808080;
+    font-family: 'Roboto';
+    font-weight: 500;
+
+}
+
+.twt-btn {
+    background-color: #28aae1;
+    text-align: center;
+    color: #F9F9F9;
+    border: #28aae1;
+    padding: 5dp;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 5px #808080;
+    font-family: 'Roboto';
+    font-weight: 500;
+
+}
+
+
+.logo-icon {
+    height: 18px;
+    width: 18px;
+    align-self: auto;
+    vertical-align: auto;
+    margin-right: 12px;
+}
+
+@media (min-width: 768px) { 
+    .container{
+        align-self: center;
+        margin: 0 auto;
+        width: 480px;
+        zoom: 90%;
+    }
+    .jumbotron{
+        padding: 0;
+    }
+ }
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .container{
+      align-self: center;
+      margin: 0 auto;
+      width: 480px;
+  }
+  .jumbotron{
+      padding: 0;
+  }
+}
+
+
+.display-2{
+    font-size: 4.5rem;
+    color: #111111;
+}
+
+
+.alert-danger{
+    background-color: #EB5757;
+    color: white;
+}
+
+.alert-success{
+    background-color: #219653;
+    color: white
+}
+
+.btn-link{
+    color: #000000;
+}

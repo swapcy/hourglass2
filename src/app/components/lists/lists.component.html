@@ -1,0 +1,56 @@
+<div class="container ttle">
+    <div class="qte text-center">
+      <p class="display-4">Not To Do list!</p>
+      <p id="subtext01" class="form-text">
+      Few things can wait. List of top time consuming activities that I would avoid..
+      </p>
+      <button type="button" class="btn btn-outline-dark btn-sm" routerLink="/time">Back</button>
+        <br>
+        <br>
+      <div  *ngIf="loggedin ; else login">
+        <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+          You are logged in!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        
+      </div>
+      <ng-template #login>
+        <div class="alert alert-warning" role="alert">
+          You are not logged in! Try out, data will not be saved!
+        </div>
+      </ng-template>
+      <div class="">
+        <form #myList="ngForm" novalidate>
+          <div class="input-group center">
+            <!-- <input type="text" class="form-control" required class="form-control" name="listItem" #listItemX="ngModel" placeholder="Type here... Be precise!" aria-label="Type here" maxlength="140" minlength="3" aria-describedby="button-addon2" [(ngModel)]="listItem"> -->
+            <textarea class="form-control" required class="form-control" name="listItem" #listItemX="ngModel" placeholder="Type here... Be precise!" aria-label="Type here" maxlength="140" minlength="3" aria-describedby="button-addon2" [(ngModel)]="listItem"></textarea>
+            <div class="input-group-append">              
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-dark" type="button" id="button-addon2" (click)="addtoList(myList)" [disabled]=!myList.valid>Add to list</button>
+        </form>             
+          <br>
+          <div *ngIf="itemList?.length == 0; else listofNotoDos ">
+            <div class="card bgx">
+              <div class="card-body">
+                <div class="lead brk">You have not added any item in the list..</div>
+              </div>
+            </div>     
+          </div>
+          <ng-template #listofNotoDos>
+            <div *ngFor= "let items of itemList" >
+              <div class="card bgx">
+                <div class="card-body">
+                <div class="lead brk">{{items.item}}</div>
+                  <button type="button" class="btn btn-link btn-sm" (click)="removeItem(items)">Remove</button>           
+                </div>
+              </div>   
+            </div>
+          </ng-template>
+          </div>
+        </div>
+  </div>
+      

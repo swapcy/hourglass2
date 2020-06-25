@@ -1,0 +1,58 @@
+<div class="col">
+    <div class="container ttle">
+        <div class="container-fluid qte text-center">
+            <!-- <div class="jumbotron jumbotron-fluid"> -->
+              <div class="qte text-center">
+                <blockquote class="blockquote">
+                  <p class="lead">“You act like mortals in all that you fear, and like immortals in all that you desire”</p>
+                  <footer class="blockquote-footer">Seneca</footer>
+                </blockquote>
+              </div>
+            <!-- </div> -->
+        </div>
+       
+      <div class="row">
+        <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h2 class="display-2">{{ dDays }} Days</h2>
+          <p class="display-4">{{dHours}}: {{dMins}}: {{dSecs}}</p>
+          <button type="button" class="btn btn-outline-dark btn-sm" routerLink="/">Back</button>
+          <br>
+          <hr>
+          <p class="lead spcs"> Welcome {{ name }},</p>
+          <button type="button" class="btn btn-light col-sm-12 col-md-8 col-lg-8" (click)="auth.signOut()" *ngIf="auth.user$ | async as user; else login">Logout</button>
+          <ng-template #login>
+            <button type="button" class="btn btn-light col-sm-12 col-md-8 col-lg-8" data-toggle="modal" data-target="#user-login">Save</button>
+          </ng-template>
+          <br><br>
+          <button type="button" class="btn btn-outline-dark col-sm-12 col-md-8 col-lg-8" routerLink="/list">NOT TO DO LIST </button>
+          <br><br>
+          <button type="button" class="btn btn-outline-dark col-sm-12 col-md-8 col-lg-8" routerLink='/journal' >DAY TO REMEMBER</button>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+            
+        </div>
+      </div>
+      
+    </div>    
+  </div>
+  
+  <!-- Login Modal Begins -->
+  <div class="modal fade container-fluid" data-keyboard="false" data-backdrop="static" id="user-login" tabindex="-1" role="dialog" aria-labelledby="user-login" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <app-amiloggedin></app-amiloggedin>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Login Model Ends -->

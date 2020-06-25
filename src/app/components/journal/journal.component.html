@@ -1,0 +1,56 @@
+<div class="container ttle">
+    <div class="qte text-center">
+      <p class="display-4">Day to remember</p>
+      <p id="subtext01" class="form-text">
+      Maintain your very own Gratitude Journal/Jar of Awesome here. Pick a date & write what made it special.
+      </p>  
+      <button type="button" class="btn btn-outline-dark btn-sm" routerLink="/time">Back</button>
+        <br>
+        <br>
+      <hr>
+      
+      <form #myList="ngForm" novalidate>
+          <mat-form-field>
+              <div class="input-group center">
+                <input class="form-control" matInput [matDatepicker]="dp3" [min]="minDate" [max]="maxDate" [ngModelOptions]="{standalone: true}" [(ngModel)]="dateInput" placeholder="Choose a date DD/MM/YYYY"  [value]="dateInput" disabled>
+              <div class="input-group-append">
+                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              </div>
+            </div>
+          </mat-form-field>
+          <textarea class="form-control" required class="form-control" name="listItem" #listItemX="ngModel" placeholder="Type here... " aria-label="Type here" maxlength="140" minlength="3" aria-describedby="button-addon2" [(ngModel)]="listItem"></textarea>          
+          <div class="row">
+            <div class="container">
+              <button class="btn btn-link btn-sm sgtn " type="button" id="button-addon3" data-toggle="button" (click)="updateListitem('Made it through a horrible day')">Made it through a horrible day</button>
+              <button class="btn btn-link btn-sm sgtn " type="button" id="button-addon4" data-toggle="button"(click)="updateListitem('I am alive!')">I am alive!</button>
+              <button class="btn btn-link btn-sm sgtn " type="button" id="button-addon5" data-toggle="button"(click)="updateListitem('Healthy & kickin ass!')">Healthy & kickin ass!</button>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-dark" type="button" id="button-addon6"  [disabled]=!myList.valid (click)= "addtoList(myList)">Save</button>
+      </form>   
+      <br>
+      <br>
+  
+      <div *ngIf="itemList?.length == 0; else listofNotoDos ">
+        <div class="card bgx">
+          <div class="card-body">
+            <div class="lead brk">Your list is empty. Get started, if you want to :)</div>
+          </div>
+        </div>     
+      </div>
+      <ng-template #listofNotoDos>
+        <div *ngFor= "let items of itemList" >
+          <div class="card bgx">
+            <div class="card-body">
+              <div class="lead brk">{{items.item}}</div>
+                <footer class="blockquote-footer">{{items.date | date}}</footer>
+                <button type="button" class="btn btn-link btn-sm" (click)="removeItem(items)">Remove</button>           
+            </div>
+          </div>   
+        </div>   
+      </ng-template>          
+      
+    </div>
+  </div>
