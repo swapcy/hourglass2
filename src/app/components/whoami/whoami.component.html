@@ -3,13 +3,13 @@
     <!-- Component Header -->
     <div class="row"> 
       <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <lottie-animation-view
-            [options]="lottieConfig"
-            [width]="200"
-            [height]="200"
-            (animCreated)="handleAnimation($event)">
-          </lottie-animation-view>
+        <div class="container center">
+          <ng-lottie
+            height="200px"
+            containerClass="moving-box another-class"
+            [options]="options"
+            (animationCreated)="animationCreated($event)"
+          ></ng-lottie>
           <h2 class="display-2">hourglass</h2>
           <p class="lead">Reminder to limited nature of the time</p>
         </div>

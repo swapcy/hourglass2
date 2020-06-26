@@ -15,10 +15,12 @@ const routes: Routes = [
   {
     path: 'time',
     component: WhatistimeComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: 'list',
     component: ListsComponent,
+    data: { animation: 'isRight' }
   },
   {
     path: 'journal',

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-amiloggedin',
@@ -10,9 +12,27 @@ export class AmiloggedinComponent implements OnInit {
   public f_icon = require("src\/app\/components\/assets\/f-text.png");
   public t_icon = require("src\/app\/components\/assets\/t-text.png");
 
-  constructor() { }
+  constructor(public auth : AuthService, private router : Router) { }
 
   ngOnInit() {
+  }
+
+  googleLogin(){
+    this.auth.googleSignin();
+
+
+  }
+
+  facebookLogin(){
+    this.auth.facebookSignin();
+
+    
+  }
+
+  async twitterLogin(){
+    const resp = await this.auth.twitterSignin()
+    const uid = resp.uid;
+ 
   }
 
 }

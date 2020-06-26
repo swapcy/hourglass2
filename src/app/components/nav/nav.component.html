@@ -1,1 +1,6 @@
-<p>nav works!</p>
+<div class="row align-self-center " *ngIf="auth.user$ | async as user; else login">
+    {{setObj(user)}}
+</div>
+<ng-template #login>
+    <br> 
+</ng-template>

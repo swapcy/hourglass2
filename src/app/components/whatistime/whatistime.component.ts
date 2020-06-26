@@ -5,9 +5,13 @@ import { DataService } from 'src/app/services/data.service';
 import { TimeService } from 'src/app/services/time.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { fader,slider } from 'src/app/services/route-animation'
 
 @Component({
   selector: 'app-whatistime',
+  animations: [
+    fader
+  ],
   templateUrl: './whatistime.component.html',
   styleUrls: ['./whatistime.component.scss']
 })
@@ -74,3 +78,5 @@ export class WhatistimeComponent implements OnInit {
   }
 
 }
+
+
