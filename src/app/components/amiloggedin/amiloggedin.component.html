@@ -1,19 +1,19 @@
 <div class="container text-center">          
-    <h5 class="title">Log in with your existing account!</h5>
-    <small class="form-text text-muted text-center">This is just to save your time & lists. Do not expect spams or mails from us!</small>
+    <h5 class="title">Log in with your social account!</h5>
+    <small class="form-text text-muted text-center">This is just to save your time & lists. Do not expect spam notifications mails from us!</small>
     <div class="btn-group-vertical">            
       <button type="button" class="btn btn-dark google-btn" (click)="googleLogin()" data-dismiss="modal">
-        <span><img src="g-text.png" alt="" class="logo-icon"></span>
+        <span><img [src]="g_icon" alt="" class="logo-icon"></span>
         Contine with Google
       </button>
       
       <button type="button" class="btn btn-dark fb-btn" (click)="facebookLogin()" data-dismiss="modal">
-        <span><img src="f-text.png" alt="" class="logo-icon"></span>
+        <span><img [src]="f_icon" alt="" class="logo-icon"></span>
         Continue with Facebook
       </button>
      
       <button type="button" class="btn btn-dark twt-btn" (click)="twitterLogin()" data-dismiss="modal">
-        <span><img src="t-text.png" alt="" class="logo-icon"></span>
+        <span><img [src]="t_icon" alt="" class="logo-icon"></span>
         Contine with Twitter
       </button>     
     </div>

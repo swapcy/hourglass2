@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-journal',
@@ -21,12 +22,14 @@ export class JournalComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private router: Router,
-    private auth : AuthService
+    private auth : AuthService,
+    private analytics : AngularFireAnalytics
   ) { }
 
   ngOnInit() {
     if(this.dataService.getValues()['dob']){
       this.itemList = (this.dataService.getJournal()).reverse();
+      this.analytics.logEvent('Journal', {"Journal_entries": JSON.stringify(this.itemList)})
     }else{
       this.router.navigate(['/']);
     }
@@ -36,6 +39,7 @@ export class JournalComponent implements OnInit {
 
     this.dataService.addJournalItem(this.listItem,this.dateInput);
     this.itemList = (this.dataService.getJournal()).reverse();
+    this.analytics.logEvent("Journal_added", {"item":this.listItem});
     if(this.dataService.userObj){
       this.auth.updateData(this.dataService.userObj)
     }
@@ -46,6 +50,8 @@ export class JournalComponent implements OnInit {
 
     this.dataService.removeJournalItem(item.id,item.item);
     this.itemList = (this.dataService.getJournal()).reverse();
+    this.analytics.logEvent("Journal_Removed", {"item":item.item});
+
     if(this.dataService.userObj){
       this.auth.updateData(this.dataService.userObj)
     }

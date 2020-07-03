@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { slider } from 'src/app/services/route-animation'
+import { slider } from 'src/app/services/route-animation';
+import { SwUpdate } from '@angular/service-worker';;
 
 
 @Component({
@@ -13,6 +14,15 @@ import { slider } from 'src/app/services/route-animation'
 })
 export class AppComponent {
   title = 'hourglass';
+
+  constructor(updates : SwUpdate){
+    updates.available.subscribe( event =>{
+      updates.activateUpdate().then(()=> document.location.reload());
+    });
+
+    
+
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];

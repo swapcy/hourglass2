@@ -1,0 +1,36 @@
+<div class="container">          
+    <h4 class="title text-center">Suggestion</h4>
+    <br>
+    <form #myform="ngForm" novalidate>
+        <div class="row">   
+          <div class="form-group" >
+            <label for="firstname">Title</label>
+            <input type="text" required class="form-control" name="title" #title="ngModel" aria-describedby="firstnamehelp" placeholder="Subject" [(ngModel)]="titlesubject" autocomplete="off">
+            <div *ngIf="title.dirty && title.invalid">
+              <small id="helpId" class="text-danger">Please provide line of subject</small>
+            </div>
+            <div *ngIf=" title.dirty && title.value.length > 100 ">
+              <small id="helpId" class="text-danger">Sorry! title cannot exceed 100 characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="dateofbirth">Message</label>
+            <textarea required class="form-control" name="content"  #content="ngModel" placeholder="Type here... "  [(ngModel)]="contentbody" autocomplete="off"></textarea>
+            <div *ngIf="content.invalid && content.dirty">
+              <small id="helpId" class="text-danger">Please say something..</small>
+            </div>
+          </div>
+        </div>
+        <div>
+         <re-captcha required name="validate" #validate="ngModel" (resolved)="resolved($event)" [(ngModel)]="recaptchavalue" [siteKey]="YOUR_SITE_KEY"></re-captcha>
+         <br>
+         
+         <br>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-dark" [disabled]=!myform.valid (click)="onClickContinue(myform)" data-dismiss="modal">Send</button>
+        </div>
+    </form>   
+  </div>

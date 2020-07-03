@@ -1,0 +1,41 @@
+<div class="col">
+    <div class="container text-center">
+        <h5>Edit Details</h5>
+    <hr>
+</div>
+<div class="container">
+    <form #myform="ngForm" novalidate>
+        <div class="row">   
+            <div class="form-group" >
+            <label for="firstname">Name</label>
+            <input type="text" required class="form-control" name="firstname" #firstname="ngModel" pattern="^[A-Za-z\s]{1,}[\.' ]{0,1}[A-Za-z\s]{0,}$" aria-describedby="firstnamehelp" placeholder="Enter Name" [(ngModel)]="username" autocomplete="off">
+            <div *ngIf="firstname.dirty && firstname.invalid">
+                <small id="helpId" class="text-danger">Please enter valid name</small>
+            </div>
+            <div *ngIf=" firstname.dirty && firstname.value.length > 40 ">
+                <small id="helpId" class="text-danger">Sorry! name cannot exceed 40 characters</small>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+            <label for="dateofbirth">Date of birth</label>
+            <input type="text" required class="form-control" name="dateofbirth"  #dateofbirth="ngModel" placeholder="DD/MM/YYYY" pattern="^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$" [(ngModel)]="userdateofbirth" autocomplete="off">
+            <div *ngIf=" dateofbirth.invalid && dateofbirth.dirty">
+                <small id="helpId" class="text-danger">Please use valid date format DD/MM/YYYY</small>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <p></p>
+        </div>
+        <div class="row text-center">
+            <button type="submit" class="btn btn-dark" [disabled]=!myform.valid (click)="onClickContinue(myform)" routerLink="/time">Continue</button>
+        </div>
+        <br>
+        <div class="container text-center">
+                <button type="button" class="btn btn-outline-dark btn-sm lead" routerLink="/time">back</button>
+    </div>
+    </form>        
+</div>
+</div>

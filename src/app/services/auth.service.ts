@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { auth } from 'firebase'
+// import { auth } from 'firebase'
+import * as firebase from 'firebase/app';
+import 'firebase/firebase-auth';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
 import { Observable,of } from 'rxjs';
@@ -27,7 +29,7 @@ export class AuthService {
    }
    
    async googleSignin() {
-    const provider = new auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
     try{
       const credentials = await this.afauth.signInWithPopup(provider);
       this.updateUserData(credentials.user);
@@ -37,7 +39,7 @@ export class AuthService {
   }
 
   async facebookSignin() {
-    const provider = new auth.FacebookAuthProvider();
+    const provider = new firebase.auth.FacebookAuthProvider();
     try{
       const credentials = await this.afauth.signInWithPopup(provider);
       this.updateUserData(credentials.user);
@@ -48,7 +50,7 @@ export class AuthService {
   }
 
   async twitterSignin() {
-    const provider = new auth.TwitterAuthProvider();
+    const provider = new firebase.auth.TwitterAuthProvider();
     try{
       const credentials = await this.afauth.signInWithPopup(provider);
       this.updateUserData(credentials.user);
@@ -123,6 +125,25 @@ export class AuthService {
     }
       
     return userRef.set(data, { merge : true });
+  }
+
+  async editDetail(user : User){
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    
+    let data : any;
+    if(this.udata.dateofBirth!="" && this.udata.name!="")
+    {
+      data = {
+        uid: user.uid,
+        dateofBirth : this.udata.dateofBirth,
+        avatar : this.udata.name
+      }
+    }else{
+    
+      console.log('Incorrect data!')
+    }
+      
+    return userRef.update(data);
   }
 
 

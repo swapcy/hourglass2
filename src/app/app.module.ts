@@ -11,12 +11,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireAnalyticsModule  } from '@angular/fire/analytics';
+import { AngularFireAnalyticsModule   } from '@angular/fire/analytics';
 
 //lottie
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { LottieAnimationViewModule } from 'ng-lottie';
+
+//re-captcha
+import { RecaptchaModule,RecaptchaFormsModule } from 'ng-recaptcha';
 
 //components
 import { WhoamiComponent } from './components/whoami/whoami.component';
@@ -29,6 +32,10 @@ import { DataService } from './services/data.service';
 import { TimeService } from './services/time.service';
 import { AuthService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { PwaService } from './services/Pwa.service';
+import { ContactComponent } from './components/contact/contact.component';
+import { EditComponent } from './components/edit/edit.component';
 
 export function playerFactory() {
   return player;
@@ -42,7 +49,9 @@ export function playerFactory() {
     WhatistimeComponent,
     ListsComponent,
     JournalComponent,
-    NavComponent
+    NavComponent,
+    ContactComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -57,9 +66,12 @@ export function playerFactory() {
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
     LottieAnimationViewModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [
     MatDatepickerModule,
@@ -73,6 +85,7 @@ export function playerFactory() {
     DataService, 
     TimeService, 
     AuthService, 
+    PwaService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent]

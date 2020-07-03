@@ -5,7 +5,7 @@
       <div class="jumbotron jumbotron-fluid">
         <div class="container center">
           <ng-lottie
-            height="200px"
+            height="250px"
             containerClass="moving-box another-class"
             [options]="options"
             (animationCreated)="animationCreated($event)"
@@ -57,7 +57,23 @@
           <button type="button" class="btn btn-outline-dark btn-sm lead" (click)="getUserDetails()">Back to time</button>
         </div>
         <button type="button" class="btn btn-link lead" (click)="auth.signOut()">Logout</button>
-      </div>    
+      </div> 
+      <br>  
+      
+  </div>
+</div>
+<br>
+<div class="container right">
+  <div class="row">
+   <div class="col-2">
+     <button class="btn btn-link" data-toggle="modal" data-target="#about">About</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-link" data-toggle="modal" data-target="#contactus">Contact</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-link" *ngIf="Pwa.promptEvent" (click)="installPwa()">Install</button>
+    </div>
   </div>
 </div>
 
@@ -77,4 +93,51 @@
 </div>
 
 
-<!-- Login Model Ends -->
+<!-- Login Modal Ends -->
+
+<!-- About Modal -->
+<div class="modal fade container-fluid" data-keyboard="false" data-backdrop="static" id="about" tabindex="-1" role="dialog" aria-labelledby="about" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        <div class="container text-center">          
+          <h4 class="title">Hourglass</h4>
+          <br>
+          <p>Our understanding of time & desires is very odd. We often forget how valueble the time is!</p>
+          <p>App converts the age into days, hours & minutes with ticking seconds. The realization of passing time has a profound effect.</p>  
+          <p>
+            All this is coupled with Not to-do list & short Journal entries that we might want to revisit someday.
+          </p>
+          <hr>
+          <p>Enjoy your experience!</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- About Modal Ends -->
+
+<!-- Contact  Modal Begins -->
+<div class="modal fade container-fluid" data-keyboard="false" data-backdrop="static" id="contactus" tabindex="-1" role="dialog" aria-labelledby="contactus" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <app-contact></app-contact>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Contact Modal Ends -->
+

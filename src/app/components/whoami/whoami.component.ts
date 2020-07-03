@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { User } from 'src/app/services/user.model';
 import { FormControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import {  } from '@angular/common';
+import { PwaService } from 'src/app/services/Pwa.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-whoami',
@@ -28,7 +30,7 @@ export class WhoamiComponent implements OnInit {
   private anim: any;
   private animationSpeed: number = 1;
 
-  constructor(private dataService : DataService, private router: Router,public auth: AuthService) {
+  constructor(private dataService : DataService, private router: Router,public auth: AuthService, public Pwa: PwaService, private analytics: AngularFireAnalytics) {
     this.lottieConfig = {
       path: '/assets/hourglass2.json',
       renderer: 'canvas',
@@ -37,39 +39,73 @@ export class WhoamiComponent implements OnInit {
     };
     this.username = dataService.name;
     this.userdateofbirth = dataService.dateofBirth;
+
+    analytics.logEvent('App loaded')
    }
-
+   
    options: AnimationOptions = {
-      path: 'https://raw.githubusercontent.com/swapcy/hourglass/master/sun-moon-rise.json'
-    };
 
+    path: 'https://raw.githubusercontent.com/swapcy/Assets/master/Kaleidoscope.json'
+    };
     handleAnimation(anim: any) {
       this.anim = anim;
     }
  
   animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
+    // console.log(animationItem);
   }
 
   ngOnInit() {
      // console.log('oninit called')
      this.username = this.dataService.getValues()['name'];
      this.userdateofbirth = this.dataService.getValues()['dob'];
+
      if(this.dataService.userObj){
        this.username = this.dataService.getValues()['name'];
        this.userdateofbirth = this.dataService.getValues()['dob'];
      }
-     // console.log(`${this.username},${this.userdateofbirth}`)
+     
+     this.analytics.logEvent('Home')
+
+     this.options = {
+      path: this.randomNumber(1,4)
+      };
  
   }
 
+
+
+
+
   onClickContinue(myformvalues){
     this.dataService.setValue(this.username, this.userdateofbirth);
+    this.analytics.logEvent('Calculate',  {"dob": this.userdateofbirth})
     myformvalues.reset();
   }
 
   async getUserDetails(){
-   this.router.navigate(['time']);
+   this.analytics.logEvent('Continue to Time',  {"dob": this.userdateofbirth})
+   this.router.navigate(['time'])
+  }
+
+  installPwa(): void {
+    this.Pwa.promptEvent.prompt();
+  }
+
+  randomNumber(min, max): string {
+    const no = Math.round(Math.random() * (max - min) + min);
+    if(no == 1){
+      return 'https://raw.githubusercontent.com/swapcy/Assets/master/hourglass2.json';
+    }
+    else if(no == 2){
+      return 'https://raw.githubusercontent.com/swapcy/Assets/master/sun-moon-rise.json';
+    }
+    else if(no ==3){
+      return 'https://raw.githubusercontent.com/swapcy/Assets/master/Kaleidoscope.json';
+    }
+    // else{
+    //   return 'https://raw.githubusercontent.com/swapcy/Assets/master/hourglass2.json';
+    // }
   }
 
 }

@@ -6,6 +6,7 @@ import { TimeService } from 'src/app/services/time.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { fader,slider } from 'src/app/services/route-animation'
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-whatistime',
@@ -32,8 +33,11 @@ export class WhatistimeComponent implements OnInit {
   constructor(private dataService : DataService, 
     private time : TimeService, 
     private router : Router, 
-    public auth : AuthService
-    ) { }
+    public auth : AuthService,
+    private analytics : AngularFireAnalytics
+    ) { 
+      
+    }
 
   ngOnInit() {
      // console.log('oninit');
@@ -41,17 +45,15 @@ export class WhatistimeComponent implements OnInit {
      this.dateofBirth = this.dataService.getValues()['dob'];
  
      if(this.name && this.dateofBirth){
-       // console.log(`Name: ${this.name} & Date of Birth: ${this.dateofBirth}`);
        this.calc(this.dateofBirth);
+       this.analytics.logEvent("Time", {'name': this.name});
        }else{
-       // console.log(`Please provide name & date of birth! ${this.name} & ${this.dateofBirth}`);
+    
        this.router.navigate(['/']);
      }
  
      if(this.dataService.userObj){
-       // console.log(JSON.stringify(this.dataService.userObj))
-       // console.log('Printing Journal ', this.dataService.journal )
-       // console.log('Printing nList ', this.dataService.nlist )
+      
      }
   }
 

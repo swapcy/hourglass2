@@ -6,6 +6,7 @@ import { WhatistimeComponent } from './components/whatistime/whatistime.componen
 import { ListsComponent } from './components/lists/lists.component';
 import { JournalComponent } from './components/journal/journal.component';
 import { AmiloggedinComponent } from './components/amiloggedin/amiloggedin.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: AmiloggedinComponent,
+  },
+  {
+    path: 'edit',
+    component: EditComponent,
   }
 
 ];

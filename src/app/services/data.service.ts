@@ -25,6 +25,7 @@ export class DataService {
     this.name = obj.avatar;
     this.dateofBirth = obj.dateofBirth;
     this.uid = obj.uid;
+    
     if(obj.nlist){
       this.nlist = obj.nlist;
     }
@@ -51,7 +52,8 @@ export class DataService {
   getValues(){
     return  {
       'name' : this.name, 
-      'dob': this.dateofBirth
+      'dob': this.dateofBirth,
+      'uid' : this.uid
     }
   }
 
@@ -134,6 +136,8 @@ export class DataService {
     })
     
   }
+
+
   
 
 

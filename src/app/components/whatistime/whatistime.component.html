@@ -16,7 +16,11 @@
         <div class="container">
           <h2 class="display-2">{{ dDays }} Days</h2>
           <p class="display-4">{{dHours}}: {{dMins}}: {{dSecs}}</p>
-          <button type="button" class="btn btn-outline-dark btn-sm" routerLink="/">Back</button>
+          <button type="button" class="btn btn-outline-dark btn-sm" *ngIf="auth.user$ | async as user ; else back" routerLink="/edit">Edit</button>
+          <ng-template #back>
+            <button type="button" class="btn btn-outline-dark btn-sm" routerLink="/">Back</button>
+          </ng-template>
+          
           <br>
           <hr>
           <p class="lead spcs"> Welcome {{ name }},</p>
